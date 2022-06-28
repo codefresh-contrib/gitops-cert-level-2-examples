@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: simple-nofication-app
+  name: uses-mattermost
   annotations:
-    notifications.argoproj.io/subscribe.on-sync-succeeded.dummy: ""
+    notifications.argoproj.io/subscribe.on-sync-succeeded.mattermost: "kk5qf7cukfd7pgynxe9i1jqh5w"
 spec:
   destination:
-    namespace: demo
+    namespace: demo-mattermost
     server: https://kubernetes.default.svc
   project: default
   source:
