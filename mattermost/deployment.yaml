@@ -1,0 +1,20 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mattermost-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mattermost-app
+  template:
+    metadata:
+      labels:
+        app: mattermost-app
+    spec:
+      containers:
+      - name: mattermost-preview
+        image: docker.io/mattermost/mattermost-preview
+        ports:
+        - containerPort: 8065
