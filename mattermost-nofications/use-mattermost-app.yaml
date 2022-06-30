@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: uses-mattermost
   annotations:
-    notifications.argoproj.io/subscribe.on-sync-succeeded.mattermost: "kk5qf7cukfd7pgynxe9i1jqh5w"
+    notifications.argoproj.io/subscribe.on-sync-succeeded.mattermost: kk5qf7cukfd7pgynxe9i1jqh5w
 spec:
   destination:
     namespace: demo-mattermost

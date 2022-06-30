@@ -43,6 +43,22 @@ data:
           {{end}}
           ]
         }]
+    mattermost:
+      attachments: |
+        [{
+          "title": "{{.app.metadata.name}}",
+          "title_link": "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
+          "color": "#18be52",
+          "fields": [{
+            "title": "Sync Status",
+            "value": "{{.app.status.sync.status}}",
+            "short": true
+          }, {
+            "title": "Repository",
+            "value": "{{.app.spec.source.repoURL}}",
+            "short": true
+          }]
+        }]  
   template.app-health-degraded: |
     email:
       subject: Application {{.app.metadata.name}} has degraded.
@@ -192,6 +208,22 @@ data:
       Sync operation details are available at: {{.context.argocdUrl}}/applications/{{.app.metadata.name}}?operation=true .
     slack:
       attachments: "[{\n  \"title\": \"{{ .app.metadata.name}}\",\n  \"title_link\":\"{{.context.argocdUrl}}/applications/{{.app.metadata.name}}\",\n  \"color\": \"#18be52\",\n  \"fields\": [\n  {\n    \"title\": \"Sync Status\",\n    \"value\": \"{{.app.status.sync.status}}\",\n    \"short\": true\n  },\n  {\n    \"title\": \"Repository\",\n    \"value\": \"{{.app.spec.source.repoURL}}\",\n    \"short\": true\n  }\n  {{range $index, $c := .app.status.conditions}}\n  {{if not $index}},{{end}}\n  {{if $index}},{{end}}\n  {\n    \"title\": \"{{$c.type}}\",\n    \"value\": \"{{$c.message}}\",\n    \"short\": true\n  }\n  {{end}}\n  ]\n}]    "
+    mattermost:
+      attachments: |
+        [{
+          "title": "{{.app.metadata.name}}",
+          "title_link": "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
+          "color": "#18be52",
+          "fields": [{
+            "title": "Sync Status",
+            "value": "{{.app.status.sync.status}}",
+            "short": true
+          }, {
+            "title": "Repository",
+            "value": "{{.app.spec.source.repoURL}}",
+            "short": true
+          }]
+        }] 
   trigger.on-deployed: |
     - description: Application is synced and healthy. Triggered once per commit.
       oncePer: app.status.sync.revision
