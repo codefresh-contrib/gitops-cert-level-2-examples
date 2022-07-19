@@ -20,4 +20,8 @@ spec:
         imagePullPolicy: Always
         image: docker.io/kostiscodefresh/simple-env-app:1.0
         ports:
-        - containerPort: 8080
+        - containerPort: 8080        
+        env:
+        - name: REGION
+          value: "us"
+
