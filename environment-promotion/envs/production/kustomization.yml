@@ -15,4 +15,5 @@ patchesStrategicMerge:
 - version.yml
 - replicas.yml
 - settings.yml
+- service.yml
 
