@@ -7,6 +7,7 @@ spec:
   selector:
     app: trivial-go-web-app
   ports:
-      - nodePort: 31000
+      - nodePort: 31001
         protocol: TCP
         port: 8080
+        name: staging-port

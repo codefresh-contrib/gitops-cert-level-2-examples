@@ -10,3 +10,4 @@ spec:
       - nodePort: 31002
         protocol: TCP
         port: 8080
+        name: prod-port
