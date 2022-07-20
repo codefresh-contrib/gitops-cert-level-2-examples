@@ -1,0 +1,67 @@
+# Promote a GitOps application from one environment to the next
+
+name: Promote application
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      source_env:
+        description: 'Source environment'
+        required: true
+        default: 'qa' 
+        type: choice
+        options:
+        - qa
+        - staging
+        - production 
+      target_env:
+        description: 'Target environment'
+        required: true
+        default: 'staging' 
+        type: choice
+        options:
+        - qa
+        - staging
+        - production 
+      promote_container:
+        description: 'Promote container tag'
+        required: true 
+        type: boolean 
+        default: 'true'
+      promote_configmaps:
+        description: 'Also promote application settings'
+        required: true 
+        type: boolean 
+      messsage:
+        description: 'Commit message'
+        required: true 
+        type: string  
+        default: 'Application promotion'
+
+
+jobs:
+  promote:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: Copy container tag
+        if:  ${{ inputs.promote_container }}
+        uses: canastro/copy-file-action@master
+        with:
+          source: "environment-promotion/envs/${{ inputs.source_env }}/version.yml"
+          target: "environment-promotion/envs/${{ inputs.target_env }}/version.yml"
+      - name: Copy settings 
+        if:  ${{ inputs.promote_configmaps }}
+        uses: canastro/copy-file-action@master
+        with:
+          source: "environment-promotion/envs/${{ inputs.source_env }}/settings.yml"
+          target: "environment-promotion/envs/${{ inputs.target_env }}/settings.yml"         
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: ${{ inputs.messsage }}    
