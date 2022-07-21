@@ -15,7 +15,7 @@ on:
         options:
         - qa
         - staging
-        - production 
+        - prod 
       target_env:
         description: 'Target environment'
         required: true
@@ -24,7 +24,7 @@ on:
         options:
         - qa
         - staging
-        - production 
+        - prod 
       promote_container:
         description: 'Promote container tag'
         required: true 
