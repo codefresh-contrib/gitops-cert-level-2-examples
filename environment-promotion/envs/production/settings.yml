@@ -18,4 +18,4 @@ spec:
         - name: SORTING
           value: "ascending"    
         - name: N_BUCKETS
-          value: "42"          
+          value: "12"          
