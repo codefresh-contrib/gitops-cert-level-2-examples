@@ -4,6 +4,7 @@ metadata:
   namespace: example06
   generateName: slack-notify-
   annotations:
+    argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/sync-wave: "10" 
 spec:
   template:
