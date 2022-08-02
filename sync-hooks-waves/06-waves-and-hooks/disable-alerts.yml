@@ -2,10 +2,10 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   namespace: example06
-  generateName: grafana-notify-
+  generateName: disable-alerts-
   annotations:
-    argocd.argoproj.io/hook: Sync
-    argocd.argoproj.io/sync-wave: "-10" 
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "20" 
 spec:
   template:
     spec:
