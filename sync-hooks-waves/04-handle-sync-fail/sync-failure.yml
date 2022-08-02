@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  namespace: example04
+  generateName: dummy-sync-fail-
+  annotations:
+    argocd.argoproj.io/hook: Sync
+spec:
+  template:
+    spec:
+      containers:
+      - name: dummy-sync-fail
+        image: alpine
+        command:
+          - "false"
+      restartPolicy: Never
+  backoffLimit: 2    

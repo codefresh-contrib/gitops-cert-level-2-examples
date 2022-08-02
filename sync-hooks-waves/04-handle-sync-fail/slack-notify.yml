@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  namespace: example04
+  generateName: slack-notify-
+  annotations:
+    argocd.argoproj.io/hook: SyncFail
+spec:
+  template:
+    spec:
+      containers:
+      - name: dummy-message
+        image: alpine
+        command:
+          - "sleep"
+          - "3"
+      restartPolicy: Never
+  backoffLimit: 2    
