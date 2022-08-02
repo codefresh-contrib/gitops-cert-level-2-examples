@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  namespace: example02
+  generateName: dummy-init-
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+      - name: dummy-run
+        image: alpine
+        command:
+          - "sleep"
+          - "5"
+      restartPolicy: Never
+  backoffLimit: 2    

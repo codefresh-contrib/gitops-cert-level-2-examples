@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: simple-deployment
-  namespace: example01
+  namespace: example02
 spec:
   replicas: 1
   selector:
