@@ -2,10 +2,9 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   namespace: example02
-  generateName: dummy-init-
+  generateName: my-db-upgrade-
   annotations:
     argocd.argoproj.io/hook: PreSync
-    argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
   template:
     spec:
@@ -14,6 +13,6 @@ spec:
         image: alpine
         command:
           - "sleep"
-          - "5"
+          - "30"
       restartPolicy: Never
   backoffLimit: 2    
