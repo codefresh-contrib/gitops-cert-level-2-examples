@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   namespace: example05
-  generateName: my-db-upgrade-
+  name: my-db-upgrade
   annotations:
     argocd.argoproj.io/sync-wave: "-20" 
 spec:

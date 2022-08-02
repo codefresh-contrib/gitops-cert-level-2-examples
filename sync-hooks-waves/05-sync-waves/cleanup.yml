@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   namespace: example05
-  generateName: cleanup-after-sync-
+  name: cleanup-after-sync
   annotations:
     argocd.argoproj.io/sync-wave: "10" 
 spec:
