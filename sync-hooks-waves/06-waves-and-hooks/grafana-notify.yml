@@ -3,9 +3,8 @@ kind: Job
 metadata:
   namespace: example06
   generateName: grafana-notify-
-  annotations:
-    argocd.argoproj.io/hook: Sync
-    argocd.argoproj.io/sync-wave: "-10" 
+  labels:
+    codefresh.io/cert: grafana-job  
 spec:
   template:
     spec:
