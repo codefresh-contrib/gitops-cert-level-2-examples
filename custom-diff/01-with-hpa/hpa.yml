@@ -1,7 +1,7 @@
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: simple-deployment
+  name: simple-hpa
   namespace: example01
 spec:
   maxReplicas: 8
