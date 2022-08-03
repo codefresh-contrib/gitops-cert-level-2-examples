@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  namespace: example06
+  generateName: my-db-upgrade-
+  labels:
+    codefresh.io/cert: db-job  
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "10" 
+spec:
+  template:
+    spec:
+      containers:
+      - name: dummy-run
+        image: alpine
+        command:
+          - "sleep"
+          - "10"
+      restartPolicy: Never
+  backoffLimit: 2    
