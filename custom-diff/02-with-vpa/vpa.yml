@@ -9,4 +9,13 @@ spec:
     kind:       Deployment
     name:       simple-deployment
   updatePolicy:
-    updateMode: "Recreate"
+    updateMode: "Auto"
+  resourcePolicy:
+    containerPolicies:
+    - containerName: "webserver-simple"
+      minAllowed:
+        cpu: "250m"
+        memory: "256Mi"
+      maxAllowed:
+        cpu: "500m"
+        memory: "512Mi"
