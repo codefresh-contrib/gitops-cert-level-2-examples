@@ -4,8 +4,8 @@ kind: Deployment
 metadata:
   name: simple-deployment
   namespace: example02
-  ## labels:
-    ##creationDate: {{ now }}
+  labels:
+    creationDate: {{ now | date "20160102150405" }}
 spec:
   selector:
     matchLabels:
