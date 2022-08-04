@@ -2,9 +2,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: simple-deployment
+  name: simple-deployment1
   namespace: example02
-  labels:
+  annotations:
     codefresh.io/creationDate: {{ now | date "20160102150405" }}
 spec:
   selector:
