@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       simple-deployment
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Recreate"
