@@ -5,7 +5,7 @@ metadata:
   name: simple-deployment
   namespace: example02
   annotations:
-    codefresh.io/creationDate: at-{{ now | date "20160102150405" }}
+    creation: at-{{ now | date "20160102150405" }}
 spec:
   selector:
     matchLabels:
