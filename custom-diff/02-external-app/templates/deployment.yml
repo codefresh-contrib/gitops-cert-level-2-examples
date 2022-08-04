@@ -4,6 +4,8 @@ kind: Deployment
 metadata:
   name: simple-deployment
   namespace: example02
+  labels:
+    creationDate: {{ now }}
 spec:
   selector:
     matchLabels:
