@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hpa-example01
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/codefresh-contrib/gitops-cert-level-2-examples.git
+    targetRevision: HEAD
+    path: ./custom-diff/01-with-hpa
+   
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: example01
+
+  # Sync policy
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true 
+
+  ignoreDifferences:
+  - group: apps
+    kind: Deployment
+    jsonPointers:
+    - /spec/replicas     
+   
