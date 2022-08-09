@@ -8,7 +8,7 @@ spec:
   - clusters: {} # Automatically use all clusters defined within Argo CD
   template:      
     metadata:
-      name: 'billing-app'
+      name: '{{name}}-billing-app'
     spec:
       # The project the application belongs to.
       project: default
