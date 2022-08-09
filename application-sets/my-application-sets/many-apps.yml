@@ -9,7 +9,7 @@ spec:
       repoURL: https://github.com/codefresh-contrib/gitops-cert-level-2-examples.git
       revision: HEAD
       directories:
-      - path: applications-sets/example-apps/*
+      - path: application-sets/example-apps/*
   template:      
     metadata:
       name: '{{path.basename}}'
