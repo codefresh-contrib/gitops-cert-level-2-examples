@@ -1,4 +1,4 @@
-name: publish-image
+name: Push Docker Image
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -24,7 +24,7 @@ env:
 
 
 jobs:
-  build:
+  build-push:
 
     runs-on: ubuntu-latest
     permissions:
@@ -54,7 +54,7 @@ jobs:
           context: ./image-updater/source-code
           file: ./image-updater/source-code/Dockerfile
           push: true
-          tags: ${{ inputs.docker_tag }}
+          tags: ${{ github.repository }}/${{ inputs.docker_tag }}
 
 
 
