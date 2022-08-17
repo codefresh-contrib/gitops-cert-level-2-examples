@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: simple-service
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: trivial-go-web-app
   ports:
-      - nodePort: 31000
-        protocol: TCP
-        port: 8080
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
