@@ -54,7 +54,7 @@ jobs:
           context: ./image-updater/source-code
           file: ./image-updater/source-code/Dockerfile
           push: true
-          tags: ${{ github.repository }}/${{ inputs.docker_tag }}
+          tags: ghcr.io/${{ github.repository }}:${{ inputs.docker_tag }}
 
 
 
