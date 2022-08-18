@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
   annotations:
     argocd-image-updater.argoproj.io/image-list: example=ghcr.io/codefresh-contrib/gitops-cert-level-2-examples
-    argocd-image-updater.argoproj.io/example.update-strategy: latest 
+    argocd-image-updater.argoproj.io/example.update-strategy: newest-build 
 spec:
   project: default
 
