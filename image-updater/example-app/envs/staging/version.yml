@@ -1,0 +1,11 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-deployment
+spec:
+  template:
+    spec:
+      containers:
+      - name: webserver-simple
+        image: ghcr.io/codefresh-contrib/gitops-cert-level-2-examples:1.0

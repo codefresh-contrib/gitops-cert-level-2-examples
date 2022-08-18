@@ -3,19 +3,19 @@ kind: Application
 metadata:
   name: follow-semver02
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: ghcr.io/codefresh-contrib/gitops-cert-level-2-examples:~1
 spec:
   project: default
 
   source:
     repoURL: https://github.com/codefresh-contrib/gitops-cert-level-2-examples.git
     targetRevision: HEAD
-    path: ./image-updater/02-semver-example
+    path: ./image-updater/example-app/envs/staging/
    
   destination:
     server: https://kubernetes.default.svc
-    namespace: example01
+    namespace: staging
 
   # Sync policy
   syncPolicy:

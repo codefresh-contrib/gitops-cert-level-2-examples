@@ -3,6 +3,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: simple-deployment
+  annotations:
+    codefresh.io/app: simple-go-app
 spec:
   replicas: 1
   selector:
@@ -15,6 +17,9 @@ spec:
     spec:
       containers:
       - name: webserver-simple
-        image: ghcr.io/codefresh-contrib/gitops-cert-level-2-examples:2.0
+        imagePullPolicy: Always
+        image: ghcr.io/codefresh-contrib/gitops-cert-level-2-examples:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 8080        
+
+
