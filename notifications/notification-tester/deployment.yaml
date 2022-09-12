@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: webserver-simple
-        image: docker.io/kostiscodefresh/notification-tester:v1.0
+        image: docker.io/kostiscodefresh/notification-tester:1.0
         ports:
         - containerPort: 8080
