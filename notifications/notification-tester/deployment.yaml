@@ -2,19 +2,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: simple-deployment
+  name: notification-tester-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: trivial-go-web-app
+      app: notification-tester
   template:
     metadata:
       labels:
-        app: trivial-go-web-app
+        app: notification-tester
     spec:
       containers:
       - name: webserver-simple
-        image: docker.io/kostiscodefresh/gitops-simple-app:v1.0
+        image: docker.io/kostiscodefresh/notification-tester:v1.0
         ports:
         - containerPort: 8080
