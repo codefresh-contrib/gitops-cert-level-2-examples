@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: notification-internal-service
+spec:
+  type: ClusterIP
+  selector:
+    app: notification-tester
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
