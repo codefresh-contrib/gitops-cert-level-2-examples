@@ -3,14 +3,14 @@ kind: Application
 metadata:
   name: simple-nofication-app
   annotations:
-    notifications.argoproj.io/subscribe.on-sync-succeeded.dummy: ""
+    notifications.argoproj.io/subscribe.on-sync-succeeded.tester: ""
 spec:
   destination:
     namespace: demo
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: ./simple-application
+    path: ./notifications/dummy-app
     repoURL: https://github.com/codefresh-contrib/gitops-cert-level-2-examples
     targetRevision: HEAD
   syncPolicy:

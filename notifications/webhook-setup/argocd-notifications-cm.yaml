@@ -1,7 +1,7 @@
 apiVersion: v1
 data:
-  service.webhook.dummy: |
-    url: https://webhook.site/fb7d9332-f789-4a5d-b2da-b70bb4c2cb42
+  service.webhook.tester: |
+    url: http://notification-internal-service.tester
   template.app-deployed: |
     email:
       subject: New version of an application {{.app.metadata.name}} is up and running.
