@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: simple-nofication-app
   annotations:
-    notifications.argoproj.io/subscribe.on-sync-succeeded.tester: ""
+    notifications.argoproj.io/subscribe.on-sync-running.tester: ""
 spec:
   destination:
     namespace: demo
