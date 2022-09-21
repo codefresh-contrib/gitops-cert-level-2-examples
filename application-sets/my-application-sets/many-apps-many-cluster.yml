@@ -14,7 +14,7 @@ spec:
               directories:
                 - path: applicationset/examples/matrix/cluster-addons/*
           # cluster generator, 'child' #2
-          - clusters:
+          - clusters: {}
 
   template:
     metadata:
