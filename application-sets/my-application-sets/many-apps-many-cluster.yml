@@ -9,7 +9,7 @@ spec:
         generators:
           # git generator, 'child' #1
           - git:
-              repoURL: https://github.com/codefresh-contrib/gitops-cert-level-2-examples.git
+              repoURL: https://github.com/VitoAmedeo/gitops-cert-level-2-examples.git
               revision: HEAD
               directories:
                 - path: applicationset/examples/matrix/cluster-addons/*
@@ -20,9 +20,9 @@ spec:
     metadata:
       name: '{{path.basename}}-{{name}}'
     spec:
-      project: 'defafult'
+      project: 'default'
       source:
-        repoURL: https://github.com/codefresh-contrib/gitops-cert-level-2-examples.git
+        repoURL: https://github.com/VitoAmedeo/gitops-cert-level-2-examples.git
         targetRevision: HEAD
         path: application-sets/example-apps/*
       destination:
