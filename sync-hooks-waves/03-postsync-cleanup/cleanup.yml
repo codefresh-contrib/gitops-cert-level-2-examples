@@ -18,3 +18,5 @@ spec:
           - "10"
       restartPolicy: Never
   backoffLimit: 2    
+    annotations:
+    argocd.argoproj.io/hook: PostSync
