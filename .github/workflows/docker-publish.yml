@@ -35,9 +35,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       
-      - name: downcase REPO
-        run: |
-          echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+      - name: Convert repository name to lowercase
+        id: string_lowercase
+        uses: ASzc/change-string-case-action@v2
+        with:
+          string: ${{ github.repository }}
+      - name: Test case conversion output
+        id: step2
+        run: echo ${{ steps.string_lowercase.outputs.lowercase }}
 
 
       # https://github.com/docker/login-action
@@ -58,7 +63,7 @@ jobs:
           context: ./image-updater/source-code
           file: ./image-updater/source-code/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository }}:${{ inputs.docker_tag }}
+          tags: ghcr.io/${{ steps.string_lowercase.outputs.lowercase }}:${{ inputs.docker_tag }}
 
 
 
