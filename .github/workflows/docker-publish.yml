@@ -34,6 +34,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      
+      - name: downcase REPO
+        run: |
+          echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
 
 
       # https://github.com/docker/login-action
