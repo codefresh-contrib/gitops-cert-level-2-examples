@@ -12,10 +12,10 @@ spec:
         - name: UI_THEME
           value: "light"
         - name: CACHE_SIZE
-          value: "1024kb"
+          value: "2048kb"
         - name: PAGE_LIMIT
           value: "25"
         - name: SORTING
           value: "ascending"    
         - name: N_BUCKETS
-          value: "24"          
+          value: "42"          
