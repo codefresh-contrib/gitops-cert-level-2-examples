@@ -5,6 +5,9 @@ metadata:
   generateName: smoke-tests-
   labels:
     codefresh.io/cert: smoke-job  
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/sync-wave: "10" 
 spec:
   template:
     spec:
