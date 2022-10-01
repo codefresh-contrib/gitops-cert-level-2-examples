@@ -9,3 +9,4 @@ spec:
       containers:
       - name: webserver-simple
         image: docker.io/kostiscodefresh/simple-env-app:2.0
+#
