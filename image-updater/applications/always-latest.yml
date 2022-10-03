@@ -4,7 +4,7 @@ metadata:
   name: always-latest01
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: ghcr.io/mahfoud-hub/gitops-cert-level-2-examples:rc2
+    argocd-image-updater.argoproj.io/image-list: ghcr.io/mahfoud-hub/gitops-cert-level-2-examples:1.0
     argocd-image-updater.argoproj.io/example.update-strategy: latest
 spec:
   project: default
