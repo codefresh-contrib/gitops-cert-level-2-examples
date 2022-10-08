@@ -9,10 +9,10 @@ spec:
         generators:
           # git generator, 'child' #1
         - git:
-              repoURL: https://github.com/gezb/gitops-cert-level-2-examples.git
-              revision: HEAD
-              directories:
-              - path: application-sets/example-apps/*
+            repoURL: https://github.com/gezb/gitops-cert-level-2-examples.git
+            revision: HEAD
+            directories:
+            - path: application-sets/example-apps/*
           # cluster generator, 'child' #2
           - clusters: {}
   template:
