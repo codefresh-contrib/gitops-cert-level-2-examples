@@ -19,7 +19,7 @@ spec:
     metadata:
       name: '{{path.basename}}-{{name}}'
     spec:
-      project: '{{metadata.labels.environment}}'
+      project: 'default'
       source:
         repoURL: https://github.com/argoproj/argo-cd.git
         targetRevision: HEAD
