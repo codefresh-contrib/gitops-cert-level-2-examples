@@ -5,6 +5,7 @@ metadata:
   labels:
     codefresh.io/cert: grafana-job 
   annotations:
+    argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/sync-wave: "-10" 
 spec:
   template:
