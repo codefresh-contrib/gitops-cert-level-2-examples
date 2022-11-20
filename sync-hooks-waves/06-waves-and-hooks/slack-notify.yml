@@ -4,7 +4,10 @@ metadata:
   namespace: example06
   generateName: slack-notify-
   labels:
-    codefresh.io/cert: slack-job  
+    codefresh.io/cert: slack-job
+  annotations:
+    argocd.argoproj.io/sync-wave: "30"
+    argocd.argoproj.io/hook: PostSync
 spec:
   template:
     spec:
