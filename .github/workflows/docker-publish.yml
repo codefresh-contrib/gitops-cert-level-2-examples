@@ -20,7 +20,7 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
+  # IMAGE_NAME: ${{ github.repository }}
 
 
 jobs:
@@ -45,6 +45,11 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
 
+      - id: imagename
+        uses: ASzc/change-string-case-action@v2
+        with:
+          string: ${{ github.repository }}
+
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
@@ -54,7 +59,5 @@ jobs:
           context: ./image-updater/source-code
           file: ./image-updater/source-code/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository }}:${{ inputs.docker_tag }}
-
-
+          tags: ghcr.io/${{ steps.imagename.outputs.lowercase }}:${{ inputs.docker_tag }}
 
