@@ -19,9 +19,6 @@ on:
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
-  # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
-
 
 jobs:
   build-push:
@@ -34,8 +31,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-
+  
+      - name: Set Env
+        run: |
+          echo "IMAGE_NAME=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
       # https://github.com/docker/login-action
       - name: Log into registry ${{ env.REGISTRY }}
         uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
@@ -54,7 +53,4 @@ jobs:
           context: ./image-updater/source-code
           file: ./image-updater/source-code/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository }}:${{ inputs.docker_tag }}
-
-
-
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.docker_tag }}
