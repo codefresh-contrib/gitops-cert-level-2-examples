@@ -1,19 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: billing-application-set
+  name: many-apps-application-set
   namespace: argocd
 spec:
   generators:
-  - list:
-      elements:
-      - namespace: team-a
-      - namespace: team-b
-      - namespace: team-c
-      - namespace: staging
+  - git:
+      repoURL: https://github.com/codefresh-contrib/gitops-cert-level-2-examples.git
+      revision: HEAD
+      directories:
+      - path: application-sets/example-apps/*
   template:      
     metadata:
-      name: '{{namespace}}-billing'
+      name: '{{path.basename}}'
     spec:
       # The project the application belongs to.
       project: default
@@ -22,12 +21,12 @@ spec:
       source:
         repoURL: https://github.com/codefresh-contrib/gitops-cert-level-2-examples.git
         targetRevision: HEAD
-        path: ./application-sets/manifests
+        path: '{{path}}'
       
       # Destination cluster and namespace to deploy the application
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{namespace}}'
+        namespace: '{{path.basename}}'
 
       # Sync policy
       syncPolicy:
