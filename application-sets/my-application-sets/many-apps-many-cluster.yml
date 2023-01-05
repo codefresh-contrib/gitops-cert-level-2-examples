@@ -19,7 +19,7 @@ spec:
     metadata:
       name: '{{path.basename}}-{{name}}'
     spec:
-      project: '{{default}}'
+      project: default
       source:
         repoURL: https://github.com/codefresh-contrib/gitops-cert-level-2-examples.git
         targetRevision: HEAD
