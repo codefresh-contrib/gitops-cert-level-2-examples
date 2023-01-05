@@ -27,5 +27,3 @@ spec:
       destination:
         server: '{{server}}'
         namespace: '{{path.basename}}'
-Footer
-© 2023 GitHub, Inc.
