@@ -17,7 +17,7 @@ spec:
           - clusters:
               selector:
                 matchLabels:
-                  argocd.argoproj.io/secret-type: *
+                  argocd.argoproj.io/secret-type: cluster
   template:
     metadata:
       name: '{{path.basename}}-{{name}}'
@@ -28,5 +28,5 @@ spec:
         targetRevision: HEAD
         path: '{{path}}'
       destination:
-        server: '{{server}}'
-        namespace: '{{path.basename}}'
+              server: https://10.5.1.94:6443
+        namespace: default
