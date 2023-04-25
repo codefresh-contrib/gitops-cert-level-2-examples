@@ -9,10 +9,10 @@ spec:
         generators:
           # git generator, 'child' #1
           - git:
-              repoURL: https://github.com/argoproj/argo-cd.git
+              repoURL: https://github.com/codefresh-contrib/gitops-cert-level-2-examples.git 
               revision: HEAD
               directories:
-                - path: applicationset/examples/matrix/cluster-addons/*
+                - path: application-sets/example-apps/*
           # cluster generator, 'child' #2
           - clusters:
               selector:
@@ -24,9 +24,17 @@ spec:
     spec:
       project: '{{metadata.labels.environment}}'
       source:
-        repoURL: https://github.com/argoproj/argo-cd.git
+        repoURL: https://github.com/codefresh-contrib/gitops-cert-level-2-examples.git 
         targetRevision: HEAD
         path: '{{path}}'
       destination:
         server: '{{server}}'
         namespace: '{{path.basename}}'
+      
+      # Sync policy
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+        automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
+          selfHeal: true # Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected ( false by default ).
+
