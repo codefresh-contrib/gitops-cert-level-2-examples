@@ -1,9 +1,5 @@
 name: Push Docker Image
 
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
 
 on:
   # Allows you to run this workflow manually from the Actions tab
@@ -15,12 +11,24 @@ on:
         default: 'latest' 
         type: string
 
+      region: 
+        description: Regions
+        default: 'region'
+        type: string
 
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
+  # aws region
+  AWS_REGION: us-east-1
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  # cat $HOME/.kube/config | base64
+  # create secrets with the base64 encoded values
+  KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+  KUBE_NAMESPACE: production
 
 
 jobs:
@@ -35,26 +43,60 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-
       # https://github.com/docker/login-action
       - name: Log into registry ${{ env.REGISTRY }}
-        uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
+        uses: docker/login-action@v2
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: render jinja2 templates to task definition json files region 2
+        if: ${{ inputs.region }} == ${{ github.secret.DEVNET_REGION_2}}
+        uses: cuchi/jinja2-action@v1.2.0
+        with:
+          template: 'relayers/ecs/task_definition-${{ env.ENVIRONMENT }}.j2'
+          output_file: 'relayers/ecs/task_definition-${{ matrix.relayer_id }}_${{ env.ENVIRONMENT }}.json'
+          data_format: json
+          variables: |
+            relayerId="3"
+            awsAccountId=${{ env.AWS_STAGE }}
+            awsRegion=${{ env.AWS_REGION_1 }}
+            awsEfs=${{ secrets.DEVNET_EFS_2 }}
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
         id: build-and-push
-        uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
+        uses: docker/build-push-action@v3
         with:
-          context: ./image-updater/source-code
-          file: ./image-updater/source-code/Dockerfile
+          context: .
           push: true
           tags: ghcr.io/${{ github.repository }}:${{ inputs.docker_tag }}
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: EKS Deployment
+        id: deploy-to-eks
+        uses: kodermax/kubectl-aws-eks@master
+        env:
+          KUBE_CONFIG_DATA: ${{ env.KUBE_CONFIG_DATA }}                                                                                                          
+          RELEASE_IMAGE: ${{ env.REGISTRY }}/${{ github.event.repository.name }}:${{ inputs.docker_tag }}
+        with:                                                                                                         
+          args: set image deployment/my-pod app=$RELEASE_IMAGE --record -n ${{ env.KUBE_NAMESPACE }}   
+
+      - name: Verify EKS Deployment
+        id: verify-eks-deployment
+        uses: kodermax/kubectl-aws-eks@master
+        env:
+          KUBE_CONFIG_DATA: ${{ env.KUBE_CONFIG_DATA }}
+        with:
+          args: rollout status deploy my-pod -n $KUBE_NAMESPACE 
 
 
 
