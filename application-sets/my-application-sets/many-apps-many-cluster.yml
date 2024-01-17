@@ -13,6 +13,7 @@ spec:
               revision: HEAD
               directories:
                 - path: application-sets/example-apps/*
+          - clusters: {} # Automatically use all clusters defined within Argo CD
   template:
     metadata:
       name: '{{path.basename}}-{{name}}'
