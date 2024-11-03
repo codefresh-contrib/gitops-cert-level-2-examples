@@ -14,6 +14,10 @@ spec:
               directories:
                 - path: application-sets/example-apps/*
           # cluster generator, 'child' #
+          - clusters:
+              selector:
+                matchLabels:
+                  argocd.argoproj.io/secret-type: cluster
   template:
     metadata:
       name: '{{path.basename}}-{{name}}'
