@@ -21,4 +21,9 @@ spec:
   syncPolicy:
     syncOptions:
       - CreateNamespace=true  
-   
+
+  ignoreDifferences:
+  - group: apps
+    kind: Deployment
+    jsonPointers:
+    - /spec/replicas
