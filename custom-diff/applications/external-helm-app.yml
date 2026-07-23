@@ -9,7 +9,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/codefresh-contrib/gitops-cert-level-2-examples.git
+    repoURL: https://github.com/talku43/gitops-cert-level-2-examples.git
     targetRevision: HEAD
     path: ./custom-diff/02-external-app
    
@@ -20,5 +20,13 @@ spec:
   # Sync policy
   syncPolicy:
     syncOptions:
-      - CreateNamespace=true  
+      - CreateNamespace=true 
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+      - /metadata/annotations/creation
+    - group: Secret
+      jsonPointers:
+      - /data/my-password
    
